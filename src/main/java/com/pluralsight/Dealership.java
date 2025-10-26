@@ -41,62 +41,85 @@ public class Dealership {
     }
 
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
-        ArrayList<Vehicle> matches = new ArrayList<>();
-        for (Vehicle listvehicle : inventory) {
-            if (listvehicle.getPrice() >= min && listvehicle.getPrice() <= max) {
-                matches.add(listvehicle);
+        ArrayList<Vehicle> matchesPrice = new ArrayList<>();
+        for (Vehicle listVehicle : inventory) {
+            if (listVehicle.getPrice() >= min && listVehicle.getPrice() <= max) {
+                matchesPrice.add(listVehicle);
             }
         }
-        return matches;
+        return matchesPrice;
     }
 
     public ArrayList<Vehicle> getVehicleByMakeModel(String make, String model) {
-        ArrayList<Vehicle> makeAndModel = new ArrayList<>();
+        ArrayList<Vehicle> matchMakeAndModel = new ArrayList<>();
         for (Vehicle makeAndModelvehicle : inventory) {
             if (makeAndModelvehicle.getMake().equalsIgnoreCase(make)
-                    && makeAndModelvehicle.getModel().equalsIgnoreCase(make)) {
-                makeAndModel.add(makeAndModelvehicle);
+                    && makeAndModelvehicle.getModel().equalsIgnoreCase(model)) {
+                matchMakeAndModel.add(makeAndModelvehicle);
 
             }
         }
-        return makeAndModel;
+        return matchMakeAndModel;
     }
 
-    ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
-        ArrayList<Vehicle> minAndMaxPrice = new ArrayList<>();
+    public ArrayList<Vehicle> getVehiclesByYear(int min) {
+        ArrayList<Vehicle> matchingVehicleYear = new ArrayList<>();
+        for (Vehicle allvehicle : inventory) {
+            if (allvehicle.getYear() >= min && allvehicle.getYear() <= min) {
+                matchingVehicleYear.add(allvehicle);
 
-
-        return null;
+            }
+        }
+        return matchingVehicleYear;
     }
 
-    ArrayList<Vehicle> getVehiclesByColor(String color) {
-        ArrayList<Vehicle> mixColor = new ArrayList<>();
-        return null;
+    public  ArrayList<Vehicle> getVehiclesByColor(String color) {
+        ArrayList<Vehicle> matchColor = new ArrayList<>();
+
+        for (Vehicle colorVehicle : inventory) {
+            if (colorVehicle.getColor().equalsIgnoreCase(color)){
+                matchColor.add(colorVehicle);
+        }
+
+      }
+        return matchColor;
     }
 
-    ArrayList<Vehicle> getVehiclesByMileage(int min, int max) {
-        ArrayList<Vehicle> VehicleMilleage = new ArrayList<>();
-        return null;
+    public ArrayList<Vehicle> getVehiclesByMileage(int min, int minMileage) {
+        ArrayList<Vehicle> matchVehicleMileage = new ArrayList<>();
+        for (Vehicle mileagevehicle : inventory) {
+            if ( mileagevehicle.getOdometer() >= min && mileagevehicle.getOdometer() <= min ){
+                matchVehicleMileage.add(mileagevehicle);
+            }
+        }
+        return matchVehicleMileage;
     }
 
-    ArrayList<Vehicle> getVehiclesByType(String type) {
-        ArrayList<Vehicle> VehiclesType = new ArrayList<>();
-        return null;
+    public ArrayList<Vehicle> getVehiclesByType(String type) {
+        ArrayList<Vehicle> matchVehiclesType = new ArrayList<>();
+        for (Vehicle allTypevehicle : inventory) {
+            if (allTypevehicle.getVehicleType().equalsIgnoreCase(type)){
+                matchVehiclesType.add(allTypevehicle);
+            }
+        }
+        
+        return matchVehiclesType;
     }
 
-    ArrayList<Vehicle> getAllVehicles() {
-        ArrayList<Vehicle> AllVehicles = new ArrayList();
-
-        return null;
-
+    public  ArrayList<Vehicle> getAllVehicles() {
+        ArrayList<Vehicle> matchAllVehicles = new ArrayList();
+        for (Vehicle vehicle : inventory) {
+            matchAllVehicles.add(vehicle);
+        }
+        return matchAllVehicles;
     }
 
     public void addVehicle(Vehicle vehicle) {
-
+    inventory.add(vehicle);
     }
 
     public void removeVehicle(Vehicle vehicle) {
-
+    inventory.remove(vehicle);
     }
 }
 
