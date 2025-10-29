@@ -45,14 +45,14 @@ public class DealerShipFileManage {
 
                 //String make, String model, String vehicleType, String color, int odometer, double pric
 
-                Vehicle allVehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
-                dealership.addVehicle(allVehicle);
+                dealership.addVehicle(new Vehicle(vin, year, make, model, vehicleType, color, odometer, price));
+
 
             }
             return dealership;
 
 
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println("Error loading file: " + ex.getMessage());
         }
         return null;
@@ -60,14 +60,15 @@ public class DealerShipFileManage {
 
     public void saveDealership(Dealership dealership) {
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME));
-            writer.println(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));
+            writer.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
 
-            ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
-            for (Vehicle vehicleInfo : vehicles) {
-                writer.println(vehicleInfo.getVin() + "|" + vehicleInfo.getYear() + "|" + vehicleInfo.getMake() + "|" + vehicleInfo.getModel() + "|" + vehicleInfo.getVehicleType() + "|" + vehicleInfo.getColor() + "|" + vehicleInfo.getOdometer() + "|" + vehicleInfo.getPrice());
+          //  ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
+            for (Vehicle vehicleInfo : dealership.getAllVehicles()) {
+                writer.write(vehicleInfo.getVin() + "|" + vehicleInfo.getYear() + "|" + vehicleInfo.getMake() + "|" + vehicleInfo.getModel() + "|" + vehicleInfo.getVehicleType() + "|" + vehicleInfo.getColor() + "|" + vehicleInfo.getOdometer() + "|" + vehicleInfo.getPrice());
             }
             writer.flush();
+            System.out.println("write the file successfully");
         } catch (IOException ex) {
             System.out.println("Error loading file: " + ex.getMessage());
         }

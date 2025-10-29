@@ -8,11 +8,12 @@ public class UserInterface {
     private static final ArrayList<Vehicle> inventory = new ArrayList<>();
     private Dealership dealership;
 
-    public void init() {
+    private Dealership init() {
 
         DealerShipFileManage fileManager = new DealerShipFileManage();
-        dealership = fileManager.getDealership();
+        return fileManager.getDealership();
     }
+
 
     // I have load dealership file is here
     // Right now I create switch case
@@ -212,7 +213,7 @@ public class UserInterface {
 
     public void processAddVehicleRequest(Scanner scanner) {
 
-//Vehicle ID (int), Make and model (String), Price (double), Possibly other fields like color, year, isAvailable, etc.
+        DealerShipFileManage vehicleSave = new DealerShipFileManage();
         System.out.println("Enter Vehicle VIN number");
         int vin = scanner.nextInt();
         scanner.nextLine();
@@ -243,8 +244,9 @@ public class UserInterface {
 
         Vehicle vehicleInfo = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
 
-        //ArrayList<Vehicle> inventory = new ArrayList<>();
+       // Saving vehicle in the file
         dealership.getAllVehicles().add(vehicleInfo);
+        vehicleSave.saveDealership(dealership);
 
         System.out.println("=================Current inventory list vehicle====================");
         System.out.println(" ");
@@ -252,11 +254,15 @@ public class UserInterface {
         for (Vehicle vehicleInventory : dealership.getAllVehicles()) {
             System.out.println(vehicleInventory);
 
+            System.out.println("Successfully add the vehicle in the file");
+
         }
 
     }
 
     public void processRemoveVehicleRequest(Scanner scanner) {
+        DealerShipFileManage removeVehicle = new DealerShipFileManage();
+
         System.out.println("“Enter the VIN of the vehicle to remove:");
         int vin = scanner.nextInt();
         scanner.nextLine();
@@ -272,6 +278,7 @@ public class UserInterface {
         if (found != null) {
             dealership.getAllVehicles().remove(found);
             System.out.println("Vehicle removed successfully.");
+            removeVehicle.saveDealership(dealership);
         } else {
             System.out.println("No vehicle with that VIN was found.");
         }
