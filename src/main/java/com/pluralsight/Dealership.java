@@ -107,15 +107,13 @@ public class Dealership {
     }
 
     public  ArrayList<Vehicle> getAllVehicles() {
-        ArrayList<Vehicle> matchAllVehicles = new ArrayList();
-        for (Vehicle vehicle : inventory) {
-            matchAllVehicles.add(vehicle);
-        }
-        return matchAllVehicles;
+        return inventory;
     }
 
     public void addVehicle(Vehicle vehicle) {
     inventory.add(vehicle);
+
+
     }
 
     public void removeVehicle(Vehicle vehicle) {
